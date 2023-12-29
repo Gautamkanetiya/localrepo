@@ -45,18 +45,7 @@ def fun(L):
                 min=j
                 L[i],L[min]=L[min],L[i]
                 
-L= [
-    product("aa", 1011, "cat1", 10),
-    product("ff", 1012, "cat2", 110),
-    product("cc", 1013, "cat3", 180),
-    product("dd", 1014, "cat4", 190),
-    product("he", 1010, "cat5", 100),
-    product("ff", 10120, "cat6", 30),
-    product("gg", 1017, "cat7", 20),
-    product("hh", 1050, "cat8", 500),
-    product("ii", 1019, "cat9", 300),
-    product("kk", 1020, "cat10", 900)
-    ]
+L=(product_list)
 fun(L)
 for pro in L:
     print(pro.name,pro.code,pro.category,pro.price)
@@ -72,18 +61,7 @@ def fun(L):
                 min=j
                 L[i],L[min]=L[min],L[i]
                 
-L= [
-    product("aa", 1011, "cat1", 10),
-    product("ff", 1012, "cat2", 110),
-    product("cc", 1013, "cat3", 180),
-    product("dd", 1014, "cat4", 190),
-    product("he", 1010, "cat5", 100),
-    product("ff", 10120, "cat6", 30),
-    product("gg", 1017, "cat7", 20),
-    product("hh", 1050, "cat8", 500),
-    product("ii", 1019, "cat9", 300),
-    product("kk", 1020, "cat10", 900)
-    ]
+L=(product_list)
 fun(L)
 for pro in L:
     print(pro.name,pro.code,pro.category,pro.price)
