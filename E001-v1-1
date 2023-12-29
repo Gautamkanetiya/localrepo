@@ -18,22 +18,79 @@ product8=product("hh",1050,"cat8",500)
 product9=product("ii",1019,"cat9",300)
 product10=product("kk",1020,"cat10",900)
 
+#search the product:
+
 product_list=[product1,product2,product3,product4,product5,product6,product7,product8,product9,product10]
-
-  
-def get_price(product):
-    return product.price
-
-sort=sorted(product_list,key=get_price)
-
-for product in sort:
-    print(product.price)
-    
 search=int(input("enter the code:"))
 for i in product_list:
     if i.code==search:
         print(i.code,i.name,i.price,i.category)
     else:
         print()
+        
+        
+#price low to high
+  
+def get_price(product):
+    return product.price
+
+
+
+def fun(L):
+    n=len(L)
+    for i in range(n-1):
+        min=i
+        for j in range(i+1,n):
+            if get_price(L[j])<get_price(L[min]):
+                min=j
+                L[i],L[min]=L[min],L[i]
+                
+L= [
+    product("aa", 1011, "cat1", 10),
+    product("ff", 1012, "cat2", 110),
+    product("cc", 1013, "cat3", 180),
+    product("dd", 1014, "cat4", 190),
+    product("he", 1010, "cat5", 100),
+    product("ff", 10120, "cat6", 30),
+    product("gg", 1017, "cat7", 20),
+    product("hh", 1050, "cat8", 500),
+    product("ii", 1019, "cat9", 300),
+    product("kk", 1020, "cat10", 900)
+    ]
+fun(L)
+for pro in L:
+    print(pro.name,pro.code,pro.category,pro.price)
+print()    
+#price high to low
+
+def fun(L):
+    n=len(L)
+    for i in range(n-1):
+        min=i
+        for j in range(i+1,n):
+            if get_price(L[j])>get_price(L[min]):
+                min=j
+                L[i],L[min]=L[min],L[i]
+                
+L= [
+    product("aa", 1011, "cat1", 10),
+    product("ff", 1012, "cat2", 110),
+    product("cc", 1013, "cat3", 180),
+    product("dd", 1014, "cat4", 190),
+    product("he", 1010, "cat5", 100),
+    product("ff", 10120, "cat6", 30),
+    product("gg", 1017, "cat7", 20),
+    product("hh", 1050, "cat8", 500),
+    product("ii", 1019, "cat9", 300),
+    product("kk", 1020, "cat10", 900)
+    ]
+fun(L)
+for pro in L:
+    print(pro.name,pro.code,pro.category,pro.price)
+    
+
+
+    
+
     
    
