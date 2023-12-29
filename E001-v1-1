@@ -43,7 +43,7 @@ def fun(L):
         for j in range(i+1,n):
             if get_price(L[j])<get_price(L[min]):
                 min=j
-                L[i],L[min]=L[min],L[i]
+        L[i],L[min]=L[min],L[i]
                 
 L=(product_list)
 fun(L)
@@ -59,7 +59,7 @@ def fun(L):
         for j in range(i+1,n):
             if get_price(L[j])>get_price(L[min]):
                 min=j
-                L[i],L[min]=L[min],L[i]
+        L[i],L[min]=L[min],L[i]
                 
 L=(product_list)
 fun(L)
