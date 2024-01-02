@@ -1,92 +1,70 @@
-class category:
-    def __init__(self,name,code,no_of_product):
-        self.name=name
-        self.code=code
-        self.no_of_product=no_of_product
+class Category:
+    def __init__(self, name, code, no_of_product):
+        self.name = name
+        self.code = code
+        self.no_of_product = no_of_product
+
     def __str__(self):
         return f"{self.name} {self.code} {self.no_of_product}"
-        
-cat1=category("aa",1011,11)
-cat2=category("bb",1012,12)
-cat3=category("cc",1013,13)
 
-print(cat1)
-print(cat2)
-print(cat3)
+class Product:
+    def __init__(self, name, code, category, price):
+        self.name = name
+        self.code = code
+        self.category = category
+        self.price = price
 
+    def get_price(self):
+        return self.price
 
-class product:
-    def __init__(self,name,code,category,price):
-        self.name=name
-        self.code=code
-        self.category=category
-        self.price=price
-    
-   
-    
-product1=product("aa",1011,cat1,10)
-product2=product("ff",1012,cat2,110)
-product3=product("cc",1013,cat3,180)
-product4=product("dd",1014,"cat4",190)
-product5=product("he",1010,"cat5",100)
-product6=product("ff",10120,"cat6",10)
-product7=product("gg",1017,"cat7",20)
-product8=product("hh",1050,"cat8",500)    
-product9=product("ii",1019,"cat9",300)
-product10=product("kk",1020,"cat10",900)
+    def Lsort(self, k):
+        n = len(k)
+        for i in range(n):
+            for j in range(i + 1, n):
+                if k[j].get_price() < k[i].get_price():
+                    k[i], k[j] = k[j], k[i]
 
-# cat1.no_of_product=4
-# cat2.no_of_product=5
-# cat3.no_of_product=8
+    def Hsort(self, h):
+        n = len(h)
+        for i in range(n):
+            for j in range(i + 1, n):
+                if h[j].get_price() > h[i].get_price():
+                    h[i], h[j] = h[j], h[i]
 
+    def search(self, product_list):
+        se = int(input("Enter the code: "))
+        for i in product_list:
+            if i.code == se:
+                print(i.name, i.code, i.category, i.price)
 
-#search the product:
+cat1 = Category("aa", 1011, 11)
+cat2 = Category("bb", 1012, 12)
+cat3 = Category("cc", 1013, 13)
 
-product_list=[product1,product2,product3,product4,product5,product6,product7,product8,product9,product10]
-search=int(input("enter the code:"))
-for i in product_list:
-    if i.code==search:
-        print(i.code,i.name,i.price,i.category)
-    else:
-        print()
-        
-        
-#price low to high
-  
-def get_price(product):
-    return product.price
+product1 = Product("aa", 1011, cat1, 10)
+product2 = Product("ff", 1012, cat2, 110)
+product3 = Product("cc", 1013, cat3, 180)
+product4 = Product("dd", 1014, cat1, 190)
+product5 = Product("he", 1010, cat2, 100)
+product6 = Product("ff", 10120, cat1, 10)
+product7 = Product("gg", 1017, cat3, 20)
+product8 = Product("hh", 1050, cat1, 500)
+product9 = Product("ii", 1019, cat2, 300)
+product10 = Product("kk", 1020, cat3, 900)
 
+product_list = [product1, product2, product3, product4, product5, product6, product7, product8, product9, product10]
 
+#  low to high
+product1.Lsort(product_list)
+for pro in product_list:
+    print(pro.name, pro.code, pro.category, pro.price)
 
-def fun(L):
-    n=len(L)
-    for i in range(n):
-        for j in range(i+1,n):
-            if get_price(L[j])<get_price(L[i]):
-                L[i],L[j]=L[j],L[i]
-                
-L=(product_list)
-fun(L)
-for pro in L:
-    print(pro.name,pro.code,pro.category,pro.price)
-print()    
-#price high to low
+print()
 
-def fun(L):
-    n=len(L)
-    for i in range(n-1):
-        for j in range(i+1,n):
-            if get_price(L[j])>get_price(L[i]):
-                L[i],L[j]=L[j],L[i]
-                
-L=(product_list)
-fun(L)
-for pro in L:
-    print(pro.name,pro.code,pro.category,pro.price)
-    
+#  high to low
+product1.Hsort(product_list)
+for pro in product_list:
+    print(pro.name, pro.code, pro.category, pro.price)
 
-
-    
-
-    
-   
+# Search
+product1.search(product_list)
