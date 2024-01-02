@@ -27,13 +27,13 @@ class product:
 product1=product("aa",1011,cat1,10)
 product2=product("ff",1012,cat2,110)
 product3=product("cc",1013,cat3,180)
-product4=product("dd",1014,"cat4",190)
-product5=product("he",1010,"cat5",100)
-product6=product("ff",10120,"cat6",10)
-product7=product("gg",1017,"cat7",20)
-product8=product("hh",1050,"cat8",500)    
-product9=product("ii",1019,"cat9",300)
-product10=product("kk",1020,"cat10",900)
+product4=product("dd",1014,cat1,190)
+product5=product("he",1010,cat2,100)
+product6=product("ff",10120,cat1,10)
+product7=product("gg",1017,cat3,20)
+product8=product("hh",1050,cat2,500)    
+product9=product("ii",1019,cat1,300)
+product10=product("kk",1020,cat3,900)
 
 # cat1.no_of_product=4
 # cat2.no_of_product=5
@@ -53,8 +53,8 @@ for i in product_list:
         
 #price low to high
   
-def get_price(product):
-    return product.price
+    def get_price(product):
+        return product.price
 
 
 

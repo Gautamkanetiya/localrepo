@@ -3,14 +3,90 @@ class category:
         self.name=name
         self.code=code
         self.no_of_product=no_of_product
+    def __str__(self):
+        return f"{self.name} {self.code} {self.no_of_product}"
         
-ob1=category("aa",1011,11)
-ob2=category("bb",1012,12)
-ob3=category("cc",1013,13)
- 
-obj=[ob1,ob2,ob3]
-for i in obj:
-    print(i.no_of_product,i.name,i.code)
+cat1=category("aa",1011,11)
+cat2=category("bb",1012,12)
+cat3=category("cc",1013,13)
+
+print(cat1)
+print(cat2)
+print(cat3)
+
+
+class product:
+    def __init__(self,name,code,category,price):
+        self.name=name
+        self.code=code
+        self.category=category
+        self.price=price
     
+   
     
+product1=product("aa",1011,cat1,10)
+product2=product("ff",1012,cat2,110)
+product3=product("cc",1013,cat3,180)
+product4=product("dd",1014,"cat4",190)
+product5=product("he",1010,"cat5",100)
+product6=product("ff",10120,"cat6",10)
+product7=product("gg",1017,"cat7",20)
+product8=product("hh",1050,"cat8",500)    
+product9=product("ii",1019,"cat9",300)
+product10=product("kk",1020,"cat10",900)
+
+# cat1.no_of_product=4
+# cat2.no_of_product=5
+# cat3.no_of_product=8
+
+
+#search the product:
+
+product_list=[product1,product2,product3,product4,product5,product6,product7,product8,product9,product10]
+search=int(input("enter the code:"))
+for i in product_list:
+    if i.code==search:
+        print(i.code,i.name,i.price,i.category)
+    else:
+        print()
+        
+        
+#price low to high
+  
+def get_price(product):
+    return product.price
+
+
+
+def fun(L):
+    n=len(L)
+    for i in range(n):
+        for j in range(i+1,n):
+            if get_price(L[j])<get_price(L[i]):
+                L[i],L[j]=L[j],L[i]
+                
+L=(product_list)
+fun(L)
+for pro in L:
+    print(pro.name,pro.code,pro.category,pro.price)
+print()    
+#price high to low
+
+def fun(L):
+    n=len(L)
+    for i in range(n-1):
+        for j in range(i+1,n):
+            if get_price(L[j])>get_price(L[i]):
+                L[i],L[j]=L[j],L[i]
+                
+L=(product_list)
+fun(L)
+for pro in L:
+    print(pro.name,pro.code,pro.category,pro.price)
     
+
+
+    
+
+    
+   
