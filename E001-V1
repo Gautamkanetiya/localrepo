@@ -17,14 +17,14 @@ class Product:
     def get_price(self):
         return self.price
 
-    def Lsort(self, k):
+    def Lsort(self,k):
         n = len(k)
         for i in range(n):
             for j in range(i + 1, n):
                 if k[j].get_price() < k[i].get_price():
                     k[i], k[j] = k[j], k[i]
 
-    def Hsort(self, h):
+    def Hsort(self,h):
         n = len(h)
         for i in range(n):
             for j in range(i + 1, n):
@@ -41,7 +41,11 @@ cat1 = Category("aa", 1011, 11)
 cat2 = Category("bb", 1012, 12)
 cat3 = Category("cc", 1013, 13)
 
-product1 = Product("aa", 1011, cat1, 10)
+print(cat1)
+print(cat2)
+print(cat3)
+
+product1= Product("aa", 1011, cat1, 10)
 product2 = Product("ff", 1012, cat2, 110)
 product3 = Product("cc", 1013, cat3, 180)
 product4 = Product("dd", 1014, cat1, 190)
@@ -68,3 +72,15 @@ for pro in product_list:
 
 # Search
 product1.search(product_list)
+
+# class MyClass:
+#     def my_method(self):
+#         print("Hello from my_method!")
+
+# # Creating an instance of MyClass
+# my_instance = MyClass()
+
+# # Calling the method on the object
+# my_instance.my_method()
+#In this example, my_instance is an object of the class MyClass.
+#The method my_method is called on this object using the syntax my_instance.my_method().

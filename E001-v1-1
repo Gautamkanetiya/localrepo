@@ -1,8 +1,8 @@
 class Category:
-    def __init__(self, name, code, no_of_product):
+    def __init__(self, name, code):
         self.name = name
         self.code = code
-        self.no_of_product = no_of_product
+        self.no_of_product=0
 
     def __str__(self):
         return f"{self.name} {self.code} {self.no_of_product}"
@@ -36,23 +36,34 @@ class Product:
         for i in product_list:
             if i.code == se:
                 print(i.name, i.code, i.category, i.price)
+                
 
-cat1 = Category("aa", 1011, 11)
-cat2 = Category("bb", 1012, 12)
-cat3 = Category("cc", 1013, 13)
+
+cat1 = Category("aa", 1011)
+cat2 = Category("bb", 1012)
+cat3 = Category("cc", 1013)
+
 
 product1 = Product("aa", 1011, cat1, 10)
 product2 = Product("ff", 1012, cat2, 110)
 product3 = Product("cc", 1013, cat3, 180)
 product4 = Product("dd", 1014, cat1, 190)
-product5 = Product("he", 1010, cat2, 100)
-product6 = Product("ff", 10120, cat1, 10)
+product5 = Product("ee", 1010, cat2, 100)
+product6 = Product("yy", 1012, cat1, 19)
 product7 = Product("gg", 1017, cat3, 20)
 product8 = Product("hh", 1050, cat1, 500)
 product9 = Product("ii", 1019, cat2, 300)
 product10 = Product("kk", 1020, cat3, 900)
 
 product_list = [product1, product2, product3, product4, product5, product6, product7, product8, product9, product10]
+
+for product in product_list:
+    product.category.no_of_product += 1
+
+# Print category info with its no_of_products
+for category in [cat1, cat2, cat3]:
+    print(f" {category.name} {category.code} {category.no_of_product}")
+
 
 #  low to high
 product1.Lsort(product_list)
@@ -68,3 +79,5 @@ for pro in product_list:
 
 # Search
 product1.search(product_list)
+
+
