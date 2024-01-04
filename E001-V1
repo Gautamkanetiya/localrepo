@@ -91,3 +91,7 @@ for pro in product_list:
 
 # Search
 product1.search(product_list)
+
+
+# Search
+product1.search(product_list)
