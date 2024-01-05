@@ -7,14 +7,6 @@ class category:
 
     def __str__(self):
         return f"{self.name} {self.code} {self.no_of_product}"
-    
-    def update(self, product_list):
-        for product in product_list:
-            if product.category == self:
-                self.no_of_product += 1
-    
-   
-    
 
 class Product:
     def __init__(self, name, code, category, price):
@@ -23,24 +15,19 @@ class Product:
         self.category = category
         self.price = price
 
-    def get_price(self):
-        return self.price
     
-   
-
-
     def Lsort(self, k):
         n = len(k)
         for i in range(n):
             for j in range(i + 1, n):
-                if k[j].get_price() < k[i].get_price():
+                if k[j].price < k[i].price:
                     k[i], k[j] = k[j], k[i]
 
     def Hsort(self, h):
         n = len(h)
         for i in range(n):
             for j in range(i + 1, n):
-                if h[j].get_price() > h[i].get_price():
+                if h[j].price > h[i].price:
                     h[i], h[j] = h[j], h[i]
 
     def search(self, product_list):
@@ -69,8 +56,8 @@ product10 = Product("kk", 1020, cat3, 900)
 
 product_list = [product1, product2, product3, product4, product5, product6, product7, product8, product9, product10]
 
-for category in [cat1, cat2, cat3]:
-    category.update(product_list)
+for product in product_list:
+    product.category.no_of_products += 1
 
     # Print category info with its no_of_products
 for category in [cat1, cat2, cat3]:
@@ -93,5 +80,3 @@ for pro in product_list:
 product1.search(product_list)
 
 
-# Search
-product1.search(product_list)
