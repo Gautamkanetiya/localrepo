@@ -1,3 +1,4 @@
+
 class category:
     def __init__(self, name, code,parent=None):
         self.name = name
@@ -10,13 +11,7 @@ class category:
 #this function use for print the object
     def __str__(self):
         return f"{self.name} {self.code} {self.no_of_products}"
-    
- #update the no of product    
-    def update(self, product_list):
-        for product in product_list:
-            if product.category == self:
-                self.no_of_products += 1
-                
+
 #add new product               
     def add_product(self, product):
         self.products.append(product)
@@ -48,20 +43,18 @@ class product:
         self.price = price
         
 #get the product price
-    def get_price(self):
-        return self.price
+
     
 # get the category name    
-    def get_name(self):
-        return self.category.name
+
     
 #sort the product list by category name
-    def sort_products_by_name(product_list):
+    def sort_products_by_name(self,product_list):
         n = len(product_list)
 
         for i in range(n - 1):
             for j in range(0, n - i - 1):
-                if product_list[j].get_name() > product_list[j + 1].get_name():
+                if product_list[j].name > product_list[j + 1].name:
                     product_list[j], product_list[j + 1] = product_list[j + 1], product_list[j]
                     
 
@@ -71,7 +64,7 @@ class product:
         n = len(k)
         for i in range(n):
             for j in range(i + 1, n):
-                if k[j].get_price() < k[i].get_price():
+                if k[j].price < k[i].price:
                     k[i], k[j] = k[j], k[i]
                     
 #high to low price
@@ -79,7 +72,7 @@ class product:
         n = len(h)
         for i in range(n):
             for j in range(i + 1, n):
-                if h[j].get_price() > h[i].get_price():
+                if h[j].price > h[i].price:
                     h[i], h[j] = h[j], h[i]
                     
 #search product by code                    
@@ -143,10 +136,10 @@ petrol.add_product(product19)
 
 product_list = [product1, product2, product3, product4, product5, product6, product7, product8, product9, product10,product11,product12,product13,product14,product15,product16,product17,product18,product19]
 
-#update the product list
-for category in cat_list:
-    category.update(product_list)
-
+#update the no_of_product 
+for product in product_list:
+    product.category.no_of_products += 1
+    
 # Print category info with its no_of_products
 print("<........ Print category info with its no_of_products......>")
 for category in cat_list:
