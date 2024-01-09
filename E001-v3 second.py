@@ -44,27 +44,25 @@ class Product:
         print(f"Stock at Locations: {self}")
         print()
 
+    @staticmethod
+    def print_stock_information(location_list, product_list):
+        for location in location_list:
+            print(f"{location.name} ({location.code}):")
+            for product in product_list:
+                if location in product.stock_at_locations:
+                    print(f"  {product.name} ({product.code}): {product.stock_at_locations[location]}")
+            print()
+
     @classmethod
-    def input_user(cls, product_list, location_list):
+    def input_user(ssss, product_list, location_list):
         for product in product_list:
             from_location_code = input(f"Enter source location code for {product.name}: ")
             to_location_code = input(f"Enter destination location code for {product.name}: ")
             quantity_to_move = int(input(f"Enter quantity to move for {product.name}: "))
-
             # Find source location
-            try:
-                from_location = next(loc for loc in location_list if loc.code == int(from_location_code))
-            except StopIteration:
-                print(f"Error: Location with code {from_location_code} not found.")
-                continue
-
+            from_location = next(loc for loc in location_list if loc.code == int(from_location_code))
             # Find destination location
-            try:
-                to_location = next(loc for loc in location_list if loc.code == int(to_location_code))
-            except StopIteration:
-                print(f"Error: Location with code {to_location_code} not found.")
-                continue
-
+            to_location = next(loc for loc in location_list if loc.code == int(to_location_code))
             # Move stocks
             product.move(from_location, to_location, quantity_to_move)
 
@@ -135,9 +133,9 @@ for product in product_list:
     product.display_details()
 
 print()
-
+# Display stocks in each location
+Product.print_stock_information(location_list, product_list)
 # Call the input_user method
 Product.input_user(product_list, location_list)
 
-# displaying product list by location
 
