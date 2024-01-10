@@ -53,9 +53,6 @@ class Product:
     def display_details(self):
         print(self)
         print()
-    @classmethod
-    def print_product_movements(self,product):
-        movements = set(Movement.movements_by_product(product))
 
 
     @classmethod
@@ -94,6 +91,15 @@ class Movement:
     def movements_by_product(product):
         return [movement for movement in Movement.movements_list if movement.product == product]
 
+    @classmethod
+    def print_product_movements(self,product):
+        for product in product_list:
+            movements = set(Movement.movements_by_product(product))
+            print(f"Product: {product.name} ({product.code})")
+            for movement in movements:
+                print(f" {movement}")
+            print()
+
 
 # Creating categories
 vehicle = Category("Duster", 1014)
@@ -117,13 +123,11 @@ product24 = Product("Product24", 1042, petrol, 900, {loc1: 40})
 product_list= [product20, product21, product22, product23, product24]
 location_list=[loc1,loc2,loc3,loc4]
 # Displaying product details
-print("------------______________________________display details__________________------------------------------")
+print("--------------------------------------------display details------------------------------------------------------")
 for product in product_list:
     product.display_details()
 
-print()
-
-# Displaying product list by location
+print("------------------------------------------------------------------------------------------------------------------")
 
 
 # Moving products from one location to another
@@ -134,6 +138,7 @@ product23.move(loc4, loc1, 9)
 product24.move(loc1, loc3, 8)
 
 # Displaying movements of each product
-print("---------------------------------------------movements details -------------------------------------------")
+print("-----------------------------------------updated stocks at locations -----------------------------------------------")
 Product.print_stock_information(location_list,product_list)
-Product.print_product_movements(product)
+print("--------------------------------------------movement all details----------------------------------------------------")
+Movement.print_product_movements(product)
