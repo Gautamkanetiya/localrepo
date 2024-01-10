@@ -5,9 +5,6 @@ class Category:
         self.parent = parent
         self.products = []
 
-
-
-
     def __str__(self):
         return f"{self.name} {self.code} {len(self.products)}"
 
