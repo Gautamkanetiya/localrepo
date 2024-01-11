@@ -2,11 +2,11 @@ class category:
     def __init__(self, name, code):
         self.name = name
         self.code = code
-        self.no_of_product=0
+        self.no_of_products=0
        
 
     def __str__(self):
-        return f"{self.name} {self.code} {self.no_of_product}"
+        return f"{self.name} {self.code} {self.no_of_products}"
 
 class Product:
     def __init__(self, name, code, category, price):
@@ -16,25 +16,25 @@ class Product:
         self.price = price
 
     
-    def Lsort(self, k):
-        n = len(k)
+    def Low_to_high_sort(self,product_list):
+        n = len(product_list)
         for i in range(n):
             for j in range(i + 1, n):
-                if k[j].price < k[i].price:
-                    k[i], k[j] = k[j], k[i]
+                if product_list[j].price < product_list[i].price:
+                    product_list[i], product_list[j] = product_list[j], product_list[i]
 
-    def Hsort(self, h):
-        n = len(h)
+    def High_to_low_sort(self, product_list):
+        n = len(product_list)
         for i in range(n):
             for j in range(i + 1, n):
-                if h[j].price > h[i].price:
-                    h[i], h[j] = h[j], h[i]
+                if product_list[j].price > product_list[i].price:
+                    product_list[i], product_list[j] = product_list[j], product_list[i]
 
     def search(self, product_list):
         se = int(input("Enter the code: "))
         for i in product_list:
             if i.code == se:
-                print(i.name, i.code, i.category, i.price)
+                print(f"product_name: {i.name}    product_code:  {i.code}    category:  {i.category}   price:  {i.price}")
                 
 
 
@@ -61,20 +61,20 @@ for product in product_list:
 
     # Print category info with its no_of_products
 for category in [cat1, cat2, cat3]:
-    print(f" {category.name} {category.code} {category.no_of_product}")
+    print(f" category_name: {category.name}  category_code:{category.code}   category_no_of_product: {category.no_of_products}")
 
 
 #  low to high
-product1.Lsort(product_list)
+product1.Low_to_high_sort(product_list)
 for pro in product_list:
-    print(pro.name, pro.code, pro.category, pro.price)
+    print(f"product_name: {pro.name}   product_code: {pro.code}   product_category: {pro.category}     product.price: {pro.price}")
 
 print()
 
 #  high to low
-product1.Hsort(product_list)
+product1.High_to_low_sort(product_list)
 for pro in product_list:
-    print(pro.name, pro.code, pro.category, pro.price)
+    print(f"product_name: {pro.name}    product_code: {pro.code}    product_category: {pro.category}    product.price: {pro.price}")
 
 # Search
 product1.search(product_list)

@@ -121,6 +121,7 @@ product22 = Product("Product22", 1040, petrol, 300, {loc3: 45})
 product23 = Product("Product23", 1041, petrol, 100, {loc4: 35})
 product24 = Product("Product24", 1042, petrol, 900, {loc1: 40})
 product_list= [product20, product21, product22, product23, product24]
+
 location_list=[loc1,loc2,loc3,loc4]
 # Displaying product details
 print("--------------------------------------------display details------------------------------------------------------")
