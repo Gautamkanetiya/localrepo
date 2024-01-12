@@ -49,7 +49,7 @@ class Product:
 
 class Order:
 
-    def __init__(self, number, date, company, billing, shipping,total, order_lines=None):
+    def __init__(self, number, date, company, billing, shipping, order_lines=None):
 
         if date < datetime.now():
             raise ValueError("Order date must be today or in the future")
@@ -59,12 +59,10 @@ class Order:
         self.company = company
         self.billing = billing
         self.shipping = shipping
-        self.total_amount=total
-        self.order_lines = order_lines or []
+        self.order_lines = []
 
     def __str__(self):
-        return (
-            f"{self.number}    {self.date}     {self.company}   {self.billing}  {self.total_amount}  {self.shipping}   ")
+        return (f" Oreder NO:{self.number} \n Date: {self.date} \n Company: {self.company} \n billinig:{self.billing} \n Shipping: {self.shipping}   ")
 
     def add_order_line(self, order_line):
         self.order_lines.append(order_line)
@@ -73,8 +71,17 @@ class Order:
         total = sum(order_line.subtotal for order_line in self.order_lines)
         return total
 
+
     def display_order(self):
-        print(self)
+        # for i in order_list:
+        #     print(f"number: {i.number} ")
+        #     print(f"date: {i.date}")
+        #     print(f"company:  {i.company}")
+        #     print(f"billing:  {i.billing}")
+        #     print(f"shipping: {i.shipping} ")
+        for order_line in self.order_lines:
+            print(f"  {order_line}")
+        print(f"total: {ord1.calculate_total_amount()} ")
 
     def order_by_date(self,order_list):
         n=len(order_list)
@@ -105,16 +112,18 @@ class Order:
 
 
 class OrderLine:
-    def __init__(self, product, quantity, price ,sub_total):
-
+    def __init__(self, order,product, quantity, price):
+        self.order=order
         self.product = product
         self.quantity = quantity
         self.price = price
-        self.sub_total = sub_total
+        self.subtotal = quantity * price
+
+    def __str__(self):
+        return f"{self.order} \n product: {self.product} \n qauntity:{self.quantity}  \n price: {self.price} \n subtotal:{self.subtotal}\n"
 
     def calculate_amount(self):
-        sub_total= self.quantity * self.price
-        return sub_total
+        return self.subtotal
 
 
 pro1=Product("product1")
@@ -125,28 +134,29 @@ pro5=Product("product1")
 
 product_list=[pro1,pro2,pro3,pro4,pro5]
 
-order_line1 = OrderLine(pro1, 30, 100)
-order_line2 = OrderLine(pro2, 70, 150)
-order_line3 = OrderLine(pro5, 34, 200)
-order_line4 = OrderLine(pro3, 40, 450)
-order_line5 = OrderLine(pro4, 90, 800)
-
-
-order_line_list=[order_line1,order_line2,order_line3,order_line4,order_line5]
 
 
 
 cus1 = Customer("gk ent", "abc@mail.com", "1234567890", "123 main bajar", "bota", "gujarat", "ind", None, "company")
-cus2 = Customer("sk ent", "bdc@mail.com", "7548467890", "123 main bajar", "ahme", "gujarat", "ind", cus1, "shipping")
-cus3 = Customer("ff ent", "fbs@mail.com", "3422567890", "123 main bajar", "ranp", "gujarat", "ind", cus2, "billing")
-cus4 = Customer("dd ent", "sds@mail.com", "1454567890", "123 main bajar", "rajk", "gujarat", "ind", cus3, "contact")
-cus5 = Customer("jj ent", "jjs@mail.com", "1234567890", "123 main bajar", "jamn", "gujarat", "ind", cus4, "company")
-total=0
-ord1 = Order(12540, datetime(2024, 1, 25), cus1, cus1, cus2, total,[order_line1, order_line2])
-ord2 = Order(32450, datetime(2024, 5, 15), cus3, cus5, cus2, total ,[order_line3, order_line4])
-ord3 = Order(82650, datetime(2024, 1, 21), cus4, cus2, cus5, total ,[order_line2, order_line5])
-ord4 = Order(52550, datetime(2024, 6, 12), cus1, cus4, cus2, total,[order_line4, order_line2])
-ord5 = Order(62850, datetime(2024, 8, 16), cus3, cus4, cus2, total,[order_line3, order_line2])
+cus2 = Customer("sk ent", "bdc@mail.com", "7548467890", "123 main bajar", "ahme", "gujarat", "ind", None, "shipping")
+cus3 = Customer("ff ent", "fbs@mail.com", "3422567890", "123 main bajar", "ranp", "gujarat", "ind", None, "billing")
+cus4 = Customer("dd ent", "sds@mail.com", "1454567890", "123 main bajar", "rajk", "gujarat", "ind", None, "contact")
+cus5 = Customer("jj ent", "jjs@mail.com", "1234567890", "123 main bajar", "jamn", "gujarat", "ind", None, "company")
+
+
+ord1 = Order(12540, datetime(2024, 1, 25), cus1, cus1, cus2, [])
+ord2 = Order(32450, datetime(2024, 5, 15), cus3, cus5, cus2, [])
+ord3 = Order(82650, datetime(2024, 1, 21), cus4, cus2, cus5, [])
+ord4 = Order(52550, datetime(2024, 6, 12), cus1, cus4, cus2, [])
+ord5 = Order(62850, datetime(2024, 8, 16), cus3, cus4, cus2, [])
+
+
+
+order_line1 = OrderLine(ord1,pro1, 30, 100)
+order_line2 = OrderLine(ord2,pro2, 70, 150)
+order_line3 = OrderLine(ord3,pro5, 34, 200)
+order_line4 = OrderLine(ord4,pro3, 40, 450)
+order_line5 = OrderLine(ord5,pro4, 90, 800)
 
 
 
@@ -162,32 +172,26 @@ order_list=[ord1,ord2,ord3,ord4,ord5]
 customer_list=[cus1,cus2,cus3,cus4,cus5]
 
 
-print("---------------------------------------------customer list -----------------------------------------------")
-for i in customer_list:
-    i.display()
-print("-------------------------------------------order details---------------------------------------------------")
 
-for i in order_list:
-    i.display_order()
+print("-------------------------------------------order details---------------------------------------------------")
+ord1.display_order()
+
+
+
 
 #
-# print(f"sub_total_of_ord1:{order_line1.calculate_amount()}")
-
-
-print(f"total: {ord1.calculate_total_amount()} ")
-
-print("----------------------------------------order_by_date---------------------------------------------------------")
-ord1.order_by_date(order_list)
-for i in order_list:
-    print(f"  number: {i.number}   date: {i.date}  company:  {i.company}   billing:  {i.billing}   shipping: {i.shipping} ")
-
-print("----------------------------------------current_month---------------------------------------------------------")
-
-current_month_orders = Order.current_month_list(order_list)
-for order in current_month_orders:
-    print(f"  number: {order.number}   date: {order.date}  company:  {order.company}   billing:  {order.billing}   shipping: {order.shipping} ")
-
-
+# print("----------------------------------------order_by_date---------------------------------------------------------")
+# ord1.order_by_date(order_list)
+# for i in order_list:
+#     print(f"  number: {i.number}   date: {i.date}  company:  {i.company}   billing:  {i.billing}   shipping: {i.shipping} ")
+#
+# print("----------------------------------------current_month---------------------------------------------------------")
+#
+# current_month_orders = Order.current_month_list(order_list)
+# for order in current_month_orders:
+#     print(f"  number: {order.number}   date: {order.date}  company:  {order.company}   billing:  {order.billing}   shipping: {order.shipping} ")
+#
+#
 
 
 
@@ -206,7 +210,7 @@ for order in current_month_orders:
 # for product_name, orders in product_wise_orders.items():
 #     print(f"Product: {product_name}")
 #     for order in orders:
-#         print(f"  Order Number: {order.number}   Date: {order.date}   Company: {order.company}   Billing: {order.billing}   Shipping: {order.shipping}")
-
-print("----------------------------------------search order by numbers------------------------------------------------")
-ord1.search_number(order_list)
+# #         print(f"  Order Number: {order.number}   Date: {order.date}   Company: {order.company}   Billing: {order.billing}   Shipping: {order.shipping}")
+#
+# print("----------------------------------------search order by numbers------------------------------------------------")
+# ord1.search_number(order_list)
