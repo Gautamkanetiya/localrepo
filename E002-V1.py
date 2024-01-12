@@ -41,11 +41,14 @@ class Customer:
 
 
 class Product:
-    def __init__(self,name):
+    def __init__(self,name,price):
         self.name=name
+        self.price=price
+
+
 
     def __str__(self):
-        return f"{self.name}"
+        return f"  product:{self.name}  price:{self.price} "
 
 class Order:
 
@@ -73,29 +76,28 @@ class Order:
 
 
     def display_order(self):
-        # for i in order_list:
-        #     print(f"number: {i.number} ")
-        #     print(f"date: {i.date}")
-        #     print(f"company:  {i.company}")
-        #     print(f"billing:  {i.billing}")
-        #     print(f"shipping: {i.shipping} ")
         for order_line in self.order_lines:
             print(f"  {order_line}")
         print(f"total: {ord1.calculate_total_amount()} ")
+
+    def display_list(self, product):
+        orders_for_product = [order_line.order for order_line in self.order_lines if product in order_line.products]
+        if orders_for_product:
+            print(f"{product.name}:")
+            for order_for_product in orders_for_product:
+                print(f"    Order {order_for_product.number} ")
+            print()
 
     def order_by_date(self,order_list):
         n=len(order_list)
         for i in range(n):
             for j in range(i + 1, n):
-                if order_list[j].date < order_list[i].date:
+                if order_list[j].date > order_list[i].date:
                     order_list[i], order_list[j] = order_list[j], order_list[i]
 
     def is_current_month(self):
         current_date = datetime.now()
         return self.date.month == current_date.month and self.date.year == current_date.year
-
-
-
 
 
     @classmethod
@@ -114,28 +116,28 @@ class Order:
 class OrderLine:
     def __init__(self, order,product, quantity, price):
         self.order=order
-        self.product = product
+        self.products = product
         self.quantity = quantity
         self.price = price
-        self.subtotal = quantity * price
+        self.subtotal = sum(quantity * product.price for product in self.products)
 
     def __str__(self):
-        return f"{self.order} \n product: {self.product} \n qauntity:{self.quantity}  \n price: {self.price} \n subtotal:{self.subtotal}\n"
+        product_str = "\n".join(str(product) for product in self.products)
+        return f"{self.order} \n  {product_str} \n quentity: {self.quantity} \n Subtotal: {self.subtotal} "
+
+
 
     def calculate_amount(self):
         return self.subtotal
 
 
-pro1=Product("product1")
-pro2=Product("product2")
-pro3=Product("product1")
-pro4=Product("product2")
-pro5=Product("product1")
+pro1=Product("product1",50)
+pro2=Product("product2",60)
+pro3=Product("product3",60)
+pro4=Product("product4",40)
+pro5=Product("product5",10)
 
 product_list=[pro1,pro2,pro3,pro4,pro5]
-
-
-
 
 cus1 = Customer("gk ent", "abc@mail.com", "1234567890", "123 main bajar", "bota", "gujarat", "ind", None, "company")
 cus2 = Customer("sk ent", "bdc@mail.com", "7548467890", "123 main bajar", "ahme", "gujarat", "ind", None, "shipping")
@@ -152,11 +154,11 @@ ord5 = Order(62850, datetime(2024, 8, 16), cus3, cus4, cus2, [])
 
 
 
-order_line1 = OrderLine(ord1,pro1, 30, 100)
-order_line2 = OrderLine(ord2,pro2, 70, 150)
-order_line3 = OrderLine(ord3,pro5, 34, 200)
-order_line4 = OrderLine(ord4,pro3, 40, 450)
-order_line5 = OrderLine(ord5,pro4, 90, 800)
+order_line1 = OrderLine(ord1,[pro1,pro2], 2, 0)
+order_line2 = OrderLine(ord2,[pro3,pro5], 1, 0)
+order_line3 = OrderLine(ord3,[pro1,pro4], 3, 0)
+order_line4 = OrderLine(ord4,[pro2,pro3], 4, 0)
+order_line5 = OrderLine(ord5,[pro4,pro5], 5, 0)
 
 
 
@@ -178,39 +180,25 @@ ord1.display_order()
 
 
 
+print("---------------------------------list of all order by specific product--------------------------------------")
+products_to_search = [pro1, pro2,pro3,pro4,pro5]
 
-#
-# print("----------------------------------------order_by_date---------------------------------------------------------")
-# ord1.order_by_date(order_list)
-# for i in order_list:
-#     print(f"  number: {i.number}   date: {i.date}  company:  {i.company}   billing:  {i.billing}   shipping: {i.shipping} ")
-#
-# print("----------------------------------------current_month---------------------------------------------------------")
-#
-# current_month_orders = Order.current_month_list(order_list)
-# for order in current_month_orders:
-#     print(f"  number: {order.number}   date: {order.date}  company:  {order.company}   billing:  {order.billing}   shipping: {order.shipping} ")
-#
-#
+for product in products_to_search:
+    for order in order_list:
+        order.display_list(product)
 
 
 
+print("----------------------------------------order_by_date---------------------------------------------------------")
+ord1.order_by_date(order_list)
+for i in order_list:
+    print(f"  number: {i.number}   date: {i.date}  company:  {i.company}   billing:  {i.billing}   shipping: {i.shipping} ")
 
+print("----------------------------------------current_month---------------------------------------------------------")
 
+current_month_orders = Order.current_month_list(order_list)
+for order in current_month_orders:
+    print(f"  number: {order.number}   date: {order.date}  company:  {order.company}   billing:  {order.billing}   shipping: {order.shipping} ")
 
-
-
-
-# product_wise_orders =[]
-# for order in order_list:
-#     # Iterate through order_lines in each order
-#     for order_line in order.order_lines:
-#         product_name = order_line.product.name
-#         product_wise_orders[product_name].append(order)
-# for product_name, orders in product_wise_orders.items():
-#     print(f"Product: {product_name}")
-#     for order in orders:
-# #         print(f"  Order Number: {order.number}   Date: {order.date}   Company: {order.company}   Billing: {order.billing}   Shipping: {order.shipping}")
-#
-# print("----------------------------------------search order by numbers------------------------------------------------")
-# ord1.search_number(order_list)
+print("----------------------------------------search order by numbers------------------------------------------------")
+ord1.search_number(order_list)
